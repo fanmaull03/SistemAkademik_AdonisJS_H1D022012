@@ -1,0 +1,39 @@
+@layout('layouts/app')
+
+@section('title')
+  Data Mahasiswa
+@endsection
+
+@section('content')
+  <h1>Daftar Mahasiswa</h1>
+  <a href="/mahasiswa/create" class="btn btn-primary mb-3">Tambah Mahasiswa</a>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NIM</th>
+        <th>Nama</th>
+        <th>Prodi</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      @each(item in mahasiswa)
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.nim }}</td>
+          <td>{{ item.nama }}</td>
+          <td>{{ item.prodi.namaProdi }}</td>
+          <td>
+            <a href="/mahasiswa/{{ item.id }}/edit" class="btn btn-sm btn-warning">Edit</a>
+            <form action="/mahasiswa/{{ item.id }}/delete" method="POST" class="d-inline">
+              @csrf()
+              <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin?')">Hapus</button>
+            </form>
+          </td>
+        </tr>
+      @endeach
+    </tbody>
+  </table>
+@endsection

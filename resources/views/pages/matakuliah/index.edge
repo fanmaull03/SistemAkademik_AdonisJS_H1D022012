@@ -1,0 +1,39 @@
+@layout('layouts/app')
+
+@section('title')
+  Data Matakuliah
+@endsection
+
+@section('content')
+  <h1>Daftar Matakuliah</h1>
+  <a href="/matakuliah/create" class="btn btn-primary mb-3">Tambah Matakuliah</a>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Kode</th>
+        <th>Nama Matakuliah</th>
+        <th>SKS</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      @each(item in matakuliah)
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.kode }}</td>
+          <td>{{ item.namaMatakuliah }}</td>
+          <td>{{ item.sks }}</td>
+          <td>
+            <a href="/matakuliah/{{ item.id }}/edit" class="btn btn-sm btn-warning">Edit</a>
+            <form action="/matakuliah/{{ item.id }}/delete" method="POST" class="d-inline">
+              @csrf()
+              <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin?')">Hapus</button>
+            </form>
+          </td>
+        </tr>
+      @endeach
+    </tbody>
+  </table>
+@endsection

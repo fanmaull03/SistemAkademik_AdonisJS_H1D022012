@@ -1,0 +1,37 @@
+@layout('layouts/app')
+
+@section('title')
+  Data Prodi
+@endsection
+
+@section('content')
+  <h1>Daftar Program Studi</h1>
+  <a href="/prodi/create" class="btn btn-primary mb-3">Tambah Prodi</a>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nama Prodi</th>
+        <th>Fakultas</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      @each(item in prodis)
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.namaProdi }}</td>
+          <td>{{ item.fakultas.namaFakultas }}</td>
+          <td>
+            <a href="/prodi/{{ item.id }}/edit" class="btn btn-sm btn-warning">Edit</a>
+            <form action="/prodi/{{ item.id }}/delete" method="POST" class="d-inline">
+              @csrf()
+              <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin?')">Hapus</button>
+            </form>
+          </td>
+        </tr>
+      @endeach
+    </tbody>
+  </table>
+@endsection

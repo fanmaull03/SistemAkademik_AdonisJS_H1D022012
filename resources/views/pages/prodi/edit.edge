@@ -1,0 +1,23 @@
+@layout('layouts/app')
+
+@section('title') Edit Prodi @endsection
+
+@section('content')
+  <h1>Edit Prodi</h1>
+  <form action="/prodi/{{ prodi.id }}" method="POST">
+    @csrf()
+    <div class="mb-3">
+      <label class="form-label">Nama Prodi</label>
+      <input type="text" name="nama_prodi" class="form-control" value="{{ prodi.namaProdi }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Fakultas</label>
+      <select name="fakultas_id" class="form-select">
+        @each(f in fakultas)
+          <option value="{{ f.id }}" {{ f.id == prodi.fakultasId ? 'selected' : '' }}>{{ f.namaFakultas }}</option>
+        @endeach
+      </select>
+    </div>
+    <button class="btn btn-primary">Update</button>
+  </form>
+@endsection

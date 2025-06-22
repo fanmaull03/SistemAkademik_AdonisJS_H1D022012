@@ -1,0 +1,52 @@
+@layout('layouts/app')
+
+@section('title') Filter Mahasiswa @endsection
+
+@section('content')
+  <h1>Filter Mahasiswa berdasarkan Fakultas & Semester</h1>
+  <form method="GET" action="/mahasiswa/filter" class="row g-3 mb-4">
+    <div class="col-md-4">
+      <label class="form-label">Fakultas</label>
+      <select name="fakultas_id" class="form-select">
+        <option value="">Semua Fakultas</option>
+        @each(f in fakultas)
+          <option value="{{ f.id }}" {{ f.id == selectedFakultas ? 'selected' : '' }}>
+            {{ f.namaFakultas }}
+          </option>
+        @endeach
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Semester</label>
+      <input type="text" name="semester" class="form-control" value="{{ selectedSemester }}">
+    </div>
+    <div class="col-md-4 d-flex align-items-end">
+      <button class="btn btn-primary w-100">Filter</button>
+    </div>
+  </form>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>NIM</th>
+        <th>Nama</th>
+        <th>Prodi</th>
+        <th>Fakultas</th>
+        <th>Semester</th>
+        <th>Total SKS</th>
+      </tr>
+    </thead>
+    <tbody>
+      @each(mhs in data)
+        <tr>
+          <td>{{ mhs.nim }}</td>
+          <td>{{ mhs.nama }}</td>
+          <td>{{ mhs.prodi.namaProdi }}</td>
+          <td>{{ mhs.fakultas.namaFakultas }}</td>
+          <td>{{ mhs.semester }}</td>
+          <td>{{ mhs.totalSks }}</td>
+        </tr>
+      @endeach
+    </tbody>
+  </table>
+@endsection

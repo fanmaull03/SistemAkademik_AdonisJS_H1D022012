@@ -1,0 +1,35 @@
+@layout('layouts/app')
+
+@section('title')
+  Data Fakultas
+@endsection
+
+@section('content')
+  <h1>Daftar Fakultas</h1>
+  <a href="/fakultas/create" class="btn btn-primary mb-3">Tambah Fakultas</a>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nama Fakultas</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      @each(fak in fakultas)
+        <tr>
+          <td>{{ fak.id }}</td>
+          <td>{{ fak.namaFakultas }}</td>
+          <td>
+            <a href="/fakultas/{{ fak.id }}/edit" class="btn btn-sm btn-warning">Edit</a>
+            <form action="/fakultas/{{ fak.id }}/delete" method="POST" class="d-inline">
+              @csrf()
+              <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin?')">Hapus</button>
+            </form>
+          </td>
+        </tr>
+      @endeach
+    </tbody>
+  </table>
+@endsection

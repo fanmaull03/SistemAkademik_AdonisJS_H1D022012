@@ -1,0 +1,27 @@
+@layout('layouts/app')
+
+@section('title') Edit Mahasiswa @endsection
+
+@section('content')
+  <h1>Edit Mahasiswa</h1>
+  <form action="/mahasiswa/{{ mahasiswa.id }}" method="POST">
+    @csrf()
+    <div class="mb-3">
+      <label class="form-label">NIM</label>
+      <input type="text" name="nim" class="form-control" value="{{ mahasiswa.nim }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Nama</label>
+      <input type="text" name="nama" class="form-control" value="{{ mahasiswa.nama }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Prodi</label>
+      <select name="prodi_id" class="form-select">
+        @each(p in prodi)
+          <option value="{{ p.id }}" {{ p.id == mahasiswa.prodiId ? 'selected' : '' }}>{{ p.namaProdi }}</option>
+        @endeach
+      </select>
+    </div>
+    <button class="btn btn-primary">Update</button>
+  </form>
+@endsection

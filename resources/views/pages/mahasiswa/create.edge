@@ -1,0 +1,27 @@
+@layout('layouts/app')
+
+@section('title') Tambah Mahasiswa @endsection
+
+@section('content')
+  <h1>Tambah Mahasiswa</h1>
+  <form action="/mahasiswa" method="POST">
+    @csrf()
+    <div class="mb-3">
+      <label class="form-label">NIM</label>
+      <input type="text" name="nim" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Nama</label>
+      <input type="text" name="nama" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Prodi</label>
+      <select name="prodi_id" class="form-select">
+        @each(p in prodi)
+          <option value="{{ p.id }}">{{ p.namaProdi }}</option>
+        @endeach
+      </select>
+    </div>
+    <button class="btn btn-success">Simpan</button>
+  </form>
+@endsection

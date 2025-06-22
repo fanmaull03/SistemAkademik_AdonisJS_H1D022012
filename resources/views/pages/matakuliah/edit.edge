@@ -1,0 +1,23 @@
+@layout('layouts/app')
+
+@section('title') Edit Matakuliah @endsection
+
+@section('content')
+  <h1>Edit Matakuliah</h1>
+  <form action="/matakuliah/{{ matakuliah.id }}" method="POST">
+    @csrf()
+    <div class="mb-3">
+      <label class="form-label">Kode</label>
+      <input type="text" name="kode" class="form-control" value="{{ matakuliah.kode }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Nama Matakuliah</label>
+      <input type="text" name="nama_matakuliah" class="form-control" value="{{ matakuliah.namaMatakuliah }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">SKS</label>
+      <input type="number" name="sks" class="form-control" value="{{ matakuliah.sks }}" required min="1" max="6">
+    </div>
+    <button class="btn btn-primary">Update</button>
+  </form>
+@endsection

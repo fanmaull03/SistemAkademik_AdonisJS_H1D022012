@@ -1,0 +1,30 @@
+@layout('layouts/app')
+
+@section('title') Total SKS Mahasiswa @endsection
+
+@section('content')
+  <h1>Daftar Mahasiswa dan Total SKS</h1>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>NIM</th>
+        <th>Nama</th>
+        <th>Prodi</th>
+        <th>Semester</th>
+        <th>Total SKS</th>
+      </tr>
+    </thead>
+    <tbody>
+      @each(mhs in data)
+        <tr>
+          <td>{{ mhs.nim }}</td>
+          <td>{{ mhs.nama }}</td>
+          <td>{{ mhs.prodi.namaProdi }}</td>
+          <td>{{ mhs.semester }}</td>
+          <td>{{ mhs.totalSks }}</td>
+        </tr>
+      @endeach
+    </tbody>
+  </table>
+@endsection
